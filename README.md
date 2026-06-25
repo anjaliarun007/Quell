@@ -1,4 +1,5 @@
 # Quell
+
 Quell is a sleek browser-based email spam analysis tool built to help writers remove spammy language and improve inbox deliverability. Paste your email content and get an instant breakdown of risky phrases, a spam score, and focused rewrite guidance — all with no data sent to servers.
 
 ## 🚀 Description
