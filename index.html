@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quell — AI Email Spam Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg-grid"></div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Noise overlay -->
+  <div class="noise"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Quell</span>
+      </div>
+      <div class="nav-badge">AI-POWERED</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="pill">FREE TOOL</span>
+      <span class="pill-line"></span>
+      <span class="pill-text">Browser-side · No data stored</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="title-line line-1">KILL</span>
+      <span class="title-line line-2">THE <em>SPAM</em></span>
+      <span class="title-line line-3">FILTER</span>
+    </h1>
+    <p class="hero-sub">Paste your email. Get an instant AI-powered verdict on spam likelihood, flagged phrases, and exactly how to fix them.</p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-n">5</span>
+        <span class="stat-l">categories scanned</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-n">100+</span>
+        <span class="stat-l">spam triggers detected</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-n">0ms</span>
+        <span class="stat-l">data sent to servers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKER TOOL -->
+  <section class="checker-section">
+    <div class="checker-card">
+
+      <!-- Input panel -->
+      <div class="panel panel-input">
+        <div class="panel-header">
+          <span class="panel-label">YOUR EMAIL</span>
+          <div class="char-counter"><span id="charCount">0</span> chars</div>
+        </div>
+        <textarea
+          id="emailInput"
+          class="email-textarea"
+          placeholder="Paste your email subject + body here…&#10;&#10;Example:&#10;Subject: URGENT — Free money offer, act NOW!!!&#10;&#10;Dear Friend, You have been selected for a special reward…"
+          spellcheck="false"
+        ></textarea>
+        <div class="panel-footer">
+          <button class="btn-clear" id="clearBtn">CLEAR</button>
+          <button class="btn-analyze" id="analyzeBtn">
+            <span class="btn-text">ANALYZE EMAIL</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Results panel -->
+      <div class="panel panel-results" id="resultsPanel">
+        <div class="results-placeholder" id="placeholder">
+          <div class="placeholder-icon">🔍</div>
+          <p>Paste your email and hit<br/><strong>ANALYZE EMAIL</strong> to get your report.</p>
+        </div>
+
+        <div class="results-content hidden" id="resultsContent">
+          <!-- Score ring -->
+          <div class="score-area">
+            <div class="score-ring" id="scoreRing">
+              <svg class="ring-svg" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50" />
+                <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="50"
+                  stroke-dasharray="314"
+                  stroke-dashoffset="314"
+                  transform="rotate(-90 60 60)" />
+              </svg>
+              <div class="ring-inner">
+                <span class="ring-score" id="ringScore">0</span>
+                <span class="ring-label">SPAM SCORE</span>
+              </div>
+            </div>
+            <div class="verdict-block" id="verdictBlock">
+              <div class="verdict-tag" id="verdictTag">SAFE</div>
+              <p class="verdict-desc" id="verdictDesc">Your email looks clean!</p>
+            </div>
+          </div>
+
+          <!-- Category bars -->
+          <div class="categories" id="categories">
+            <div class="cat-header">CATEGORY BREAKDOWN</div>
+          </div>
+
+          <!-- Flagged words -->
+          <div class="flags-section" id="flagsSection">
+            <div class="cat-header">FLAGGED PHRASES</div>
+            <div class="flags-list" id="flagsList"></div>
+          </div>
+
+          <!-- Suggestions -->
+          <div class="suggestions-section" id="suggestionsSection">
+            <div class="cat-header">HOW TO FIX IT</div>
+            <div class="suggestions-list" id="suggestionsList"></div>
+          </div>
+
+          <!-- AI Deep Analysis -->
+          <div class="ai-section" id="aiSection">
+            <div class="cat-header">
+              <span>AI DEEP ANALYSIS</span>
+              <span class="ai-badge">QUELL AI</span>
+            </div>
+            <div class="ai-content" id="aiContent">
+              <button class="btn-ai" id="aiBtn">
+                <span class="ai-btn-icon">✦</span>
+                GET AI ANALYSIS
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-eyebrow">HOW IT WORKS</div>
+      <h2 class="section-title">FIVE LAYERS OF<br/><em>PROTECTION</em></h2>
+      <div class="categories-grid">
+        <div class="cat-card" data-cat="urgency">
+          <div class="cat-icon">🚨</div>
+          <div class="cat-name">URGENCY</div>
+          <p>Words that pressure recipients into immediate action — "Act NOW", "Limited time", "Don't miss out".</p>
+        </div>
+        <div class="cat-card" data-cat="shady">
+          <div class="cat-icon">🔞</div>
+          <div class="cat-name">SHADY</div>
+          <p>Ethically or legally questionable content, scam language, and phrases that raise red flags.</p>
+        </div>
+        <div class="cat-card" data-cat="overpromise">
+          <div class="cat-icon">🤩</div>
+          <div class="cat-name">OVERPROMISE</div>
+          <p>Exaggerated claims like "guaranteed results", "risk-free", "you won't believe" — classic spam hallmarks.</p>
+        </div>
+        <div class="cat-card" data-cat="money">
+          <div class="cat-icon">💰</div>
+          <div class="cat-name">MONEY</div>
+          <p>Suspicious financial language — "free money", "earn $$$", "no investment needed", "wire transfer".</p>
+        </div>
+        <div class="cat-card" data-cat="unnatural">
+          <div class="cat-icon">💬</div>
+          <div class="cat-name">UNNATURAL</div>
+          <p>Phrases that sound robotic or non-human, like mass-email boilerplate and awkward salutations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">COMMON<br/><em>QUESTIONS</em></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">Is my email content private?</button>
+          <div class="faq-a">Yes. All scanning runs directly in your browser. Your email content never leaves your device and is never stored or shared.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How is the spam score calculated?</button>
+          <div class="faq-a">We match your email against 100+ known spam trigger phrases across 5 categories. Each match adds weight to the score. A single flagged word rarely causes spam — the cumulative count matters most.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What does the AI analysis do?</button>
+          <div class="faq-a">The AI analysis uses Quell’s local deep review to go beyond keyword matching. It reads the tone, intent, and structure of your email and gives personalised rewording advice to make it inbox-safe.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Why does my email still go to spam even after cleaning it?</button>
+          <div class="faq-a">Content is only one signal. Check your SPF/DKIM/DMARC records, sender reputation, and list hygiene too. Quell handles the content side.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Quell</span>
+      </div>
+      <p class="footer-sub">Built for email deliverability. No tracking. No sign-up. Just results.</p>
+    </div>
+  </footer>
+
+  <script src="spam-data.js"></script>
+  <script src="analyzer.js"></script>
+  <script src="ai-analysis.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
